@@ -129,7 +129,7 @@ class RenderingTask(Thread):
 
     """
     def __init__(self, page, border_width=0.01, border_color=(0, 0, 0),
-                 quality=QUALITY_FAST, output_file=None,
+                 quality=QUALITY_BEST, output_file=None,
                  on_update=None, on_complete=None, on_fail=None):
         super().__init__()
 
@@ -221,7 +221,7 @@ class RenderingTask(Thread):
         if self.quality == QUALITY_FAST:
             method = PIL.Image.NEAREST
         else:
-            method = PIL.Image.ANTIALIAS
+            method = PIL.Image.LANCZOS  
 
         shape = img.size[0] * cell.h - img.size[1] * cell.w
         if shape > 0:  # image is too thick
